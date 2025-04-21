@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PixelVerse - Komunitas Game & Anime</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fefefe;
+      font-family: 'Press Start 2P', cursive;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #ff007f;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 4px solid #fff;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #222;
+      border-bottom: 2px dashed #ffcc00;
+    }
+    nav a {
+      color: #ffcc00;
+      text-decoration: none;
+      padding: 15px;
+      display: inline-block;
+    }
+    nav a:hover {
+      background-color: #333;
+    }
+    .content {
+      padding: 20px;
+    }
+    .section {
+      margin-bottom: 30px;
+      background-color: #2c2c2c;
+      padding: 15px;
+      border: 3px solid #00ffff;
+    }
+    .section h2 {
+      font-size: 14px;
+      color: #00ffff;
+    }
+    .section p {
+      font-size: 10px;
+    }
+    .form-box {
+      background-color: #2c2c2c;
+      border: 3px solid #ffcc00;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+    input, textarea {
+      font-family: 'Press Start 2P', cursive;
+      width: 100%;
+      margin: 10px 0;
+      padding: 8px;
+      font-size: 10px;
+      background-color: #1a1a1a;
+      border: 2px solid #ffcc00;
+      color: #fff;
+    }
+    button {
+      font-family: 'Press Start 2P', cursive;
+      background-color: #00ffff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 10px;
+    }
+    button:hover {
+      background-color: #00bbbb;
+    }
+    .admin-panel {
+      background-color: #400040;
+      padding: 15px;
+      border: 3px solid #ff007f;
+      margin-top: 30px;
+      display: none;
+    }
+    .admin-panel h2 {
+      color: #ff007f;
+      font-size: 14px;
+    }
+    footer {
+      background-color: #111;
+      color: #888;
+      text-align: center;
+      padding: 10px;
+      font-size: 10px;
+      border-top: 2px dotted #ff007f;
+    }
+  </style>
+  <script>
+    let loginAttempts = 0;
+    const maxAttempts = 3;
+    const storedUsername = "admin";
+    const storedPasswordHash = "a4df226d72508ad8c63796ed9f21457f"; // md5 of '2002_ninggsih'
+    function md5(string) {
+      return CryptoJS.MD5(string).toString();
+    }
+    function loginUser() {
+      if (loginAttempts >= maxAttempts) {
+        alert("Terlalu banyak percobaan login. Silakan coba lagi nanti.");
+        return;
+      }
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const passwordHash = md5(password);
+      if (username === storedUsername && passwordHash === storedPasswordHash) {
+        document.getElementById("adminPanel").style.display = "block";
+        alert("Login sebagai admin berhasil!");
+      } else {
+        loginAttempts++;
+        alert("Login gagal. Percobaan ke-" + loginAttempts);
+      }
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>PixelVerse: Komunitas Game & Anime</h1>
+  </header>
+  <nav>
+    <a href="#">Beranda</a>
+    <a href="#">Forum</a>
+    <a href="#">Fanart</a>
+    <a href="#">Event</a>
+    <a href="#">Masuk</a>
+  </nav>
+  <div class="content">
+    <div class="section">
+      <h2>Berita Terbaru</h2>
+      <p>Final Fantasy Pixel Remaster Resmi Rilis di Steam! Sudah siap nostalgia?</p>
+    </div>
+    <div class="section">
+      <h2>Anime Populer Minggu Ini</h2>
+      <p>1. Frieren  <br> 2. Solo Leveling  <br> 3. One Piece (Egghead Arc)</p>
+    </div>
+    <div class="form-box">
+      <h2>Upload Fanart</h2>
+      <input type="text" placeholder="Judul Fanart">
+      <textarea placeholder="Deskripsi singkat"></textarea>
+      <input type="file">
+      <button>Kirim</button>
+    </div>
+    <div class="form-box">
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="loginUser()">Masuk</button>
+    </div>
+    <div class="admin-panel" id="adminPanel">
+      <h2>Panel Admin</h2>
+      <p>Selamat datang, Admin! Kamu bisa menghapus post, kelola user, dan atur konten komunitas di sini.</p>
+      <button>Kelola Postingan</button>
+      <button>Kelola Pengguna</button>
+      <button>Tambah Berita</button>
+    </div>
+  </div>
+  <footer>
+    &copy; 2025 PixelVerse. Made with retro love.
+  </footer>
+</body>
+</html>
